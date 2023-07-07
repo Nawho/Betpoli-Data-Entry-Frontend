@@ -1,0 +1,182 @@
+package com.example.helloworld.ui.screens.landing
+
+import android.util.Log
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.absoluteOffset
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shadow
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.em
+import androidx.compose.ui.unit.sp
+
+
+@Composable
+fun LandingScreen(
+    onRegisterClicked: () -> Unit,
+    onLoginClicked: () -> Unit,
+) {
+    /* var num = remember{ mutableStateOf(4) } */
+
+    Surface(
+        color= MaterialTheme.colorScheme.background,
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Box(Modifier.fillMaxSize()) {
+            /*Image(
+                painter = painterResource(id = R.drawable.future_background),
+                contentDescription = stringResource(id = R.string.landing_bg_description),
+                modifier = Modifier
+                    .fillMaxSize()
+                    .scale(1.4f)
+            )*/
+
+            Column(modifier = Modifier
+                .absoluteOffset(0.dp, 200.dp)
+            ) {
+                LandingTitle()
+
+                Column(
+                    modifier = Modifier
+                        .absoluteOffset(y = 250.dp)
+                ) {
+                    LandingButton(
+                        btnText = "Create account",
+                        onClick = {
+                            Log.d("app_logs", "Create Account clicked!")
+                            onRegisterClicked()
+                        },
+                        yOffset = 0.dp
+                    )
+
+                    LandingButton(
+                        btnText = "Sign in",
+                        onClick = {
+                            Log.d("app_logs", "Sign in clicked!")
+                            onLoginClicked()
+                        },
+                        yOffset = 5.dp,
+                        customContainerColor = Color.Transparent,
+                        customContentColor = MaterialTheme.colorScheme.primary
+                    )
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun LandingTitle() {
+    Box(
+        modifier = Modifier
+            .height(10.dp)
+            .fillMaxWidth()
+    )
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center,
+        modifier = Modifier
+            .fillMaxWidth()
+
+    ) {
+        Text(
+            text = "POLICTL",
+            textAlign = TextAlign.Center,
+            fontSize = 8.em,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.colorScheme.primary,
+            style = TextStyle.Default.copy(
+                fontSize = 64.sp,
+                shadow = Shadow(
+                    color = Color.Black,
+                    offset = Offset(0f, 0f),
+                    blurRadius = 5f
+                ),
+                background = Color.Transparent
+            ),
+
+            )
+        Text(
+            text = "BetPoli Data-entry Control Panel",
+            color = MaterialTheme.colorScheme.primary,
+            textAlign = TextAlign.Center,
+            fontSize = 3.em,
+            lineHeight = 1.em,
+            fontWeight = FontWeight.Normal
+        )
+    }
+}
+
+
+@Composable
+fun LandingButton(
+    btnText: String,
+    onClick: () -> Unit,
+    yOffset: Dp = 0.dp,
+    customContentColor: Color = MaterialTheme.colorScheme.onPrimary,
+    customContainerColor: Color = MaterialTheme.colorScheme.primary
+) {
+    Row(
+        horizontalArrangement = Arrangement.Center,
+        modifier= Modifier
+            .fillMaxWidth()
+
+    ) {
+        Button(
+            onClick,
+            modifier = Modifier
+                .width(300.dp)
+                .height(60.dp)
+                .padding(5.dp)
+                .absoluteOffset(y = yOffset)
+                .border(
+                    shape = RoundedCornerShape(30.dp),
+                    width = 3.dp,
+                    color = MaterialTheme.colorScheme.primary
+                ),
+            colors = ButtonDefaults.buttonColors(
+                contentColor = customContentColor,
+                containerColor = customContainerColor
+            )
+        ) {
+            Text(
+                text = btnText
+            )
+        }
+    }
+}
+
+
+/*
+@Preview(showBackground = true)
+@Composable
+fun LandingScreenPreview() {
+    HelloWorldTheme {
+        LandingScreen()
+    }
+}*/
