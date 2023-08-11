@@ -21,18 +21,20 @@ class BetViewModel : ViewModel() {
     init {
         fetchJournalists()
     }
-    private fun fetchJournalists() {
+    fun fetchJournalists() {
         viewModelScope.launch {
             try {
                 val call = RestClient().getService().getJournalists()
                 val response = call.awaitResponse()
+
+                Log.d("app_logs", response.toString())
 
                 if (response.isSuccessful) {
                     val getResponse = response.body()
                     Log.d("app_logs", getResponse.toString())
                 }
             } catch (e: Exception) {
-                Log.e("app_logs", "FAILED")
+                Log.e("app_logs", "FAILED" + e.message + e.toString())
             }
         }
     }
@@ -41,10 +43,10 @@ class BetViewModel : ViewModel() {
 
 interface Api {
     @Headers("Accept: Application/json")
-    @GET("journalists")
+    @GET("/journalists/")
     fun getJournalists(): Call<List<JournalistModel>>
 
-    @POST("journalists")
+    @POST("/journalists/")
     fun postUser(@Body journalist: JournalistModel)
 }
 
@@ -55,11 +57,11 @@ class RestClient {
     }
 
     init {
-        val baseUrl = "http://localhost:5555/"
+        val baseUrl = "http://172.16.255.223:5555/"
         val client = OkHttpClient.Builder()
-        client.connectTimeout(2, TimeUnit.MINUTES)
-        client.readTimeout(2, TimeUnit.MINUTES)
-        client.writeTimeout(2, TimeUnit.MINUTES)
+        client.connectTimeout(30, TimeUnit.SECONDS)
+        client.readTimeout(30, TimeUnit.SECONDS)
+        client.writeTimeout(30, TimeUnit.SECONDS)
         val gson = GsonBuilder()
             .serializeNulls()
             .setLenient()
