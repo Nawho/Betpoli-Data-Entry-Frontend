@@ -5,21 +5,33 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.TextFieldValue
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
+import com.example.helloworld.models.JournalistModel
 import com.example.helloworld.ui.components.Custombutton
+import com.example.helloworld.ui.components.PasswordTextField
+import com.example.helloworld.ui.components.CustomTextField
+import com.google.gson.GsonBuilder
+import okhttp3.OkHttpClient
+import retrofit2.Call
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.http.Body
+import retrofit2.http.GET
+import retrofit2.http.POST
+import retrofit2.http.Headers
+import java.util.concurrent.TimeUnit
 
 @Composable
 fun RegisterScreen() {
@@ -37,12 +49,15 @@ fun RegisterScreen() {
 
             CustomTextField(
                 label = "Email",
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
+                modifier = Modifier.width(300.dp)
             )
 
-            CustomTextField(
+            PasswordTextField(
                 label = "Password",
                 modifier = Modifier
                     .offset(y = 15.dp)
+                    .width(300.dp)
             )
 
             Custombutton(
@@ -54,25 +69,6 @@ fun RegisterScreen() {
             )
         }
     }
-}
-
-
-@Composable
-fun CustomTextField(
-    label: String,
-    modifier: Modifier = Modifier
-) {
-    val text = remember { mutableStateOf(TextFieldValue("")) }
-
-    TextField(
-        value = text.value,
-        onValueChange = {
-            text.value = it
-        },
-        label = { Text(text = label) },
-        placeholder = { Text(text = "Enter your $label") },
-        modifier = modifier
-    )
 }
 
 @Composable
