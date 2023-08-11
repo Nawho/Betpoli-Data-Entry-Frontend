@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -14,6 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
@@ -53,6 +55,7 @@ fun RegisterScreen() {
                 label = "Email",
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
                 modifier = Modifier.width(300.dp)
+
             )
 
             PasswordTextField(
@@ -60,10 +63,12 @@ fun RegisterScreen() {
                 modifier = Modifier
                     .offset(y = 15.dp)
                     .width(300.dp)
+                    .clip(RoundedCornerShape(15.dp, 15.dp, 0.dp, 0.dp))
+
             )
 
             Custombutton(
-                btnText = "Register",
+                btnText = "Login",
                 onClick = {
                     Log.d("app_logs", "Register clicked")
                 },
@@ -76,7 +81,7 @@ fun RegisterScreen() {
 @Composable
 fun RegisterTitle() {
     Text(
-        text = "Register to access the platform",
+        text = "Login to access the platform",
         color = MaterialTheme.colorScheme.primary,
         textAlign = TextAlign.Center,
         fontSize = 5.em,
