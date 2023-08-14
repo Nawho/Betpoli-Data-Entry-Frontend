@@ -28,11 +28,8 @@ import com.example.helloworld.ui.components.Custombutton
 
 @Composable
 fun LandingScreen(
-    onRegisterClicked: () -> Unit,
     onLoginClicked: () -> Unit,
 ) {
-    /* var num = remember{ mutableStateOf(4) } */
-
     Surface(
         color= MaterialTheme.colorScheme.background,
         modifier = Modifier
@@ -56,14 +53,14 @@ fun LandingScreen(
                     modifier = Modifier
                         .absoluteOffset(y = 250.dp)
                 ) {
-                    Custombutton(
+                    /*Custombutton(
                         btnText = "Create account",
                         onClick = {
                             Log.d("app_logs", "Create Account clicked!")
                             onRegisterClicked()
                         },
                         yOffset = 0.dp
-                    )
+                    )*/
 
                     Custombutton(
                         btnText = "Sign in",
@@ -72,8 +69,6 @@ fun LandingScreen(
                             onLoginClicked()
                         },
                         yOffset = 5.dp,
-                        customContainerColor = Color.Transparent,
-                        customContentColor = MaterialTheme.colorScheme.primary
                     )
                 }
             }

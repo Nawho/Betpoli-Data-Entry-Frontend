@@ -6,10 +6,13 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -18,6 +21,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.unit.dp
 
 @Composable
 fun CustomTextField(
@@ -33,8 +37,12 @@ fun CustomTextField(
             text.value = it
         },
         keyboardOptions = keyboardOptions,
+        colors = TextFieldDefaults.colors(
+            unfocusedContainerColor = MaterialTheme.colorScheme.secondaryContainer,
+            focusedContainerColor = MaterialTheme.colorScheme.secondaryContainer
+        ),
         label = { Text(text = label) },
-        placeholder = { Text(text = "Enter your $label") },
+        placeholder = { Text(text = "Ingrese su $label") },
         modifier = modifier
     )
 }
@@ -57,8 +65,12 @@ fun PasswordTextField(
         label = {
             Text(text = label)
         },
-        placeholder = { Text(text = "Type password here") },
-        shape = RoundedCornerShape(percent = 20),
+        colors = TextFieldDefaults.colors(
+            unfocusedContainerColor = MaterialTheme.colorScheme.secondaryContainer,
+            focusedContainerColor = MaterialTheme.colorScheme.secondaryContainer
+        ),
+        placeholder = { Text(text = "Ingrese su contraseña") },
+        shape = RoundedCornerShape(8.dp),
         visualTransformation = if (showPassword.value) {
             VisualTransformation.None
         } else {
