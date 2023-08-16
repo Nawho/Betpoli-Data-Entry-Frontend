@@ -22,7 +22,8 @@ private val PeriodistasDarkColorScheme = darkColorScheme(
     onSurface = Color(0xFFFFFFFF), //text
     background = Color(0xFF222222),
     primaryContainer = Color(0xFF4A4A4A),
-    secondaryContainer = Color(0xFF2C2C2C)
+    secondaryContainer = Color(0xFF2C2C2C),
+    error = Color(0xFFBD1515)
 )
 
 private val PeriodistasLightColorScheme = lightColorScheme(
@@ -31,7 +32,8 @@ private val PeriodistasLightColorScheme = lightColorScheme(
     onSurface = Color(0xFF4E4B4B), //text
     background = Color(0xFFE2E2E2),
     primaryContainer = Color(0xFFD8D8D8), //card bg
-    secondaryContainer = Color(0xFFC6C6C6) //inputs bg
+    secondaryContainer = Color(0xFFC6C6C6), //inputs bg
+    error = Color(0xFFBD1515)
 )
 
 /*

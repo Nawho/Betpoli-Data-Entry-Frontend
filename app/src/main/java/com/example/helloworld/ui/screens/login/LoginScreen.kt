@@ -6,6 +6,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
@@ -21,6 +22,9 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableStateMapOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -39,7 +43,7 @@ import com.example.helloworld.models.JournalistModel
 import com.example.helloworld.ui.BetViewModel
 import com.example.helloworld.ui.components.Custombutton
 import com.example.helloworld.ui.components.PasswordTextField
-import com.example.helloworld.ui.components.CustomTextField
+import com.example.helloworld.ui.components.EmailTextField
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import retrofit2.Call
@@ -53,6 +57,11 @@ import java.util.concurrent.TimeUnit
 
 @Composable
 fun LoginScreen() {
+    val emailError = remember { mutableStateOf(true) }
+    val passwordError = remember { mutableStateOf(true) }
+
+    Log.d("app_logs", "Email error: " + emailError.value)
+
     Surface(
         color= MaterialTheme.colorScheme.background,
         modifier = Modifier
@@ -67,8 +76,7 @@ fun LoginScreen() {
 
             Card(
                 modifier = Modifier
-                    .height(360.dp)
-                    .offset(y = 0.dp)
+                    .height(420.dp)
                     .padding(horizontal = 25.dp),
                 shape = RoundedCornerShape(corner = CornerSize(15.dp)),
                 colors = CardDefaults.cardColors(
@@ -80,57 +88,56 @@ fun LoginScreen() {
                     modifier = Modifier
                         .padding(horizontal = 30.dp, vertical = 50.dp)
                 ) {
-                    CustomTextField(
+                    EmailTextField(
                         label = "Email",
-                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
+                        errorState = emailError,
                         modifier = Modifier
                             .width(300.dp)
                             .background(color = MaterialTheme.colorScheme.secondaryContainer)
                     )
+
+                    Spacer(Modifier.height(25.dp))
 
                     PasswordTextField(
                         label = "Contraseña",
+                        errorState = passwordError,
                         modifier = Modifier
-                            .offset(y = 25.dp)
                             .width(300.dp)
                             .background(color = MaterialTheme.colorScheme.secondaryContainer)
                     )
 
+                    Spacer(Modifier.height(50.dp))
 
-                    Column(
-                        modifier = Modifier.offset(y = 70.dp)
+                    Custombutton(
+                        btnText = "Login",
+                        enabled = !emailError.value && !passwordError.value,
+                        onClick = {
+                            Log.d("app_logs", "Login clicked")
+                            val viewmodel = BetViewModel()
+                            viewmodel.fetchJournalists()
+                        },
+                    )
+
+
+                    Row(
+                        modifier = Modifier.offset(y = 20.dp)
                     ) {
-                        Custombutton(
-                            btnText = "Login",
-                            onClick = {
-                                Log.d("app_logs", "Register clicked")
-                            },
+                        Text(
+                            text = "¿No eres periodista?",
+                            color = MaterialTheme.colorScheme.primary,
+                            fontWeight = FontWeight.SemiBold
                         )
-
-                        Row(
-                            modifier = Modifier.offset(y = 20.dp)
-                        ){
-                            Text(
-                                text = "¿No eres periodista?",
-                                color = MaterialTheme.colorScheme.primary,
-                                fontWeight = FontWeight.SemiBold
-                            )
-                            Text(
-                                text = " Ingresa Aquí",
-                                color = MaterialTheme.colorScheme.primary,
-                                fontWeight = FontWeight.SemiBold,
-                                textDecoration = TextDecoration.Underline
-                            )
-                        }
+                        Text(
+                            text = " Ingresa Aquí",
+                            color = MaterialTheme.colorScheme.primary,
+                            fontWeight = FontWeight.SemiBold,
+                            textDecoration = TextDecoration.Underline
+                        )
                     }
+
                 }
             }
         }
-    }
-
-    LaunchedEffect(Unit) {
-        Log.d("app_logs", "launched")
-        val viewmodel = BetViewModel()
     }
 }
 

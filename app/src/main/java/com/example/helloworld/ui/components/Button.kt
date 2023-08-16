@@ -29,6 +29,7 @@ fun Custombutton(
     yOffset: Dp = 0.dp,
     customContentColor: Color = MaterialTheme.colorScheme.onSurface,
     customContainerColor: Color = MaterialTheme.colorScheme.primary,
+    enabled: Boolean = true,
 ) {
     Row(
         horizontalArrangement = Arrangement.Center,
@@ -52,6 +53,7 @@ fun Custombutton(
                 contentColor = customContentColor,
                 containerColor = customContainerColor
             ),
+            enabled = enabled,
             shape=RoundedCornerShape(corner = CornerSize(10.dp))
         ) {
             Text(

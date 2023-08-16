@@ -18,9 +18,7 @@ import retrofit2.http.POST
 import java.util.concurrent.TimeUnit
 
 class BetViewModel : ViewModel() {
-    init {
-        fetchJournalists()
-    }
+
     fun fetchJournalists() {
         viewModelScope.launch {
             try {
@@ -59,9 +57,9 @@ class RestClient {
     init {
         val baseUrl = "http://172.16.255.223:5555/"
         val client = OkHttpClient.Builder()
-        client.connectTimeout(30, TimeUnit.SECONDS)
-        client.readTimeout(30, TimeUnit.SECONDS)
-        client.writeTimeout(30, TimeUnit.SECONDS)
+        client.connectTimeout(5, TimeUnit.SECONDS)
+        client.readTimeout(5, TimeUnit.SECONDS)
+        client.writeTimeout(5, TimeUnit.SECONDS)
         val gson = GsonBuilder()
             .serializeNulls()
             .setLenient()
