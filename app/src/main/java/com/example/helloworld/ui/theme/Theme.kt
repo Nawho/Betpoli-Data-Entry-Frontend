@@ -26,6 +26,7 @@ private val PeriodistasDarkColorScheme = darkColorScheme(
     error = Color(0xFFBD1515)
 )
 
+
 private val PeriodistasLightColorScheme = lightColorScheme(
     primary = Color(0xFF0EB0C7),
     secondary = Color(0xFF2BFAA0),

@@ -5,6 +5,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.helloworld.models.JournalistModel
 import com.google.gson.GsonBuilder
+import com.google.gson.JsonElement
+import com.google.gson.JsonObject
 import kotlinx.coroutines.launch
 import okhttp3.OkHttpClient
 import retrofit2.Call
@@ -36,6 +38,28 @@ class BetViewModel : ViewModel() {
             }
         }
     }
+
+    fun postUser(email: String, passwd: String) {
+        viewModelScope.launch {
+            val user = JsonObject()
+            try {
+                user.addProperty("fullName", "Funciona")
+                user.addProperty("dni", 5555)
+                user.addProperty("email", email)
+                user.addProperty("passwd", passwd)
+            }catch (e: Error){
+                Log.e("app_logs","No tengo idea que paso Bv")
+            }
+            Log.d("app_logs", "Se creo correctamente: $user")
+            val call = try {
+                RestClient().getService().postUser(user)
+            } catch (e: Exception) {
+                TODO("Not yet implemented")
+            }
+            val response = call.awaitResponse()
+            Log.d("app_logs", response.toString())
+        }
+    }
 }
 
 
@@ -45,7 +69,7 @@ interface Api {
     fun getJournalists(): Call<List<JournalistModel>>
 
     @POST("/journalists/")
-    fun postUser(@Body journalist: JournalistModel)
+    fun postUser(@Body journalist: JsonObject): Call<Unit>
 }
 
 class RestClient {
@@ -55,7 +79,7 @@ class RestClient {
     }
 
     init {
-        val baseUrl = "http://172.16.255.223:5555/"
+        val baseUrl = "https://a209-190-189-176-246.ngrok-free.app"
         val client = OkHttpClient.Builder()
         client.connectTimeout(5, TimeUnit.SECONDS)
         client.readTimeout(5, TimeUnit.SECONDS)

@@ -40,9 +40,9 @@ import androidx.compose.ui.unit.dp
 fun EmailTextField(
     label: String,
     errorState: MutableState<Boolean>,
+    email: MutableState<TextFieldValue>,
     modifier: Modifier = Modifier
 ) {
-    val email = remember { mutableStateOf(TextFieldValue("")) }
     val firstInput = remember { mutableStateOf(true) }
     val focusManager = LocalFocusManager.current
 
@@ -97,9 +97,9 @@ fun EmailTextField(
 fun PasswordTextField(
     label: String,
     errorState: MutableState<Boolean>,
+    password: MutableState<TextFieldValue>,
     modifier: Modifier = Modifier
 ) {
-    val password = remember { mutableStateOf(TextFieldValue("")) }
     val showPassword = remember { mutableStateOf(value = false) }
     val errorShowState = remember { mutableStateOf(0) }
     val focusManager = LocalFocusManager.current

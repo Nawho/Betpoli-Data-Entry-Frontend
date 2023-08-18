@@ -34,6 +34,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role.Companion.Image
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
@@ -59,6 +60,10 @@ import java.util.concurrent.TimeUnit
 fun LoginScreen() {
     val emailError = remember { mutableStateOf(true) }
     val passwordError = remember { mutableStateOf(true) }
+    val password = remember { mutableStateOf(TextFieldValue("")) }
+    val email = remember { mutableStateOf(TextFieldValue("")) }
+
+
 
     Log.d("app_logs", "Email error: " + emailError.value)
 
@@ -91,6 +96,7 @@ fun LoginScreen() {
                     EmailTextField(
                         label = "Email",
                         errorState = emailError,
+                        email = email,
                         modifier = Modifier
                             .width(300.dp)
                             .background(color = MaterialTheme.colorScheme.secondaryContainer)
@@ -101,6 +107,7 @@ fun LoginScreen() {
                     PasswordTextField(
                         label = "Contraseña",
                         errorState = passwordError,
+                        password = password,
                         modifier = Modifier
                             .width(300.dp)
                             .background(color = MaterialTheme.colorScheme.secondaryContainer)
@@ -114,7 +121,7 @@ fun LoginScreen() {
                         onClick = {
                             Log.d("app_logs", "Login clicked")
                             val viewmodel = BetViewModel()
-                            viewmodel.fetchJournalists()
+                            viewmodel.postUser(email.value.text, password.value.text)
                         },
                     )
 
