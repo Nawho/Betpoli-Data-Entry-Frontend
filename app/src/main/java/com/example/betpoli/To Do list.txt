@@ -1,0 +1,3 @@
+Matches:
+Translate match states
+create good looking UI with team names that shrink to a certain point and then use ellipsis (...)

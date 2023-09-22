@@ -61,7 +61,7 @@ class RestClient {
     }
 
     init {
-        val baseUrl = "https://e795-190-189-176-246.ngrok-free.app/"
+        val baseUrl = "https://399b-190-189-176-246.ngrok-free.app/"
         val client = OkHttpClient.Builder()
         client.connectTimeout(5, TimeUnit.SECONDS)
         client.readTimeout(5, TimeUnit.SECONDS)

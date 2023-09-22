@@ -51,21 +51,32 @@ fun MatchesScreen() {
         ) { innerPadding ->
             Column(
                 modifier = Modifier
-                    .fillMaxWidth(),
-                horizontalAlignment = Alignment.CenterHorizontally
+                    .fillMaxWidth()
+                    .padding(innerPadding),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(25.dp)
             ) {
+                Spacer(modifier = Modifier.height(25.dp))
+                Box(modifier = Modifier
+                    .width(350.dp)
+                    .height(40.dp)
+                    .background(color = MaterialTheme.colorScheme.primaryContainer)
+                ){
+                    Text("Leto hot")
+                }
                 Box(
                     modifier = Modifier
-                        .padding(innerPadding)
-                        .width(340.dp)
+                        .fillMaxWidth()
+                        .padding(16.dp)
                         .background(color = MaterialTheme.colorScheme.primaryContainer)
+
                 ) {
                     LazyColumn(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(20.dp),
+                            .padding(8.dp),
                         horizontalAlignment = Alignment.CenterHorizontally,
-                        verticalArrangement = Arrangement.spacedBy(20.dp)
+                        verticalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
                         items(
                             count = matches.size,
