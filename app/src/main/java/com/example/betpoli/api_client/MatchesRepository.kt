@@ -3,13 +3,26 @@ package com.example.betpoli.api_client
 import android.os.Build
 import android.util.Log
 import androidx.annotation.RequiresApi
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.betpoli.models.Match
-import com.example.betpoli.models.MatchState
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import retrofit2.Response
 import retrofit2.awaitResponse
 import java.time.LocalDate
 
-class MatchesHandler {
+class MatchesRepository {
+    val _matchesFlow = MutableStateFlow<List<Match>>(emptyList());
+    val matchesFlow = _matchesFlow.asSharedFlow()
+
+    init {
+        sharedFlowInit()
+    }
+
+    fun sharedFlowInit() {
+
+    }
     suspend fun getMatch(id: Int): Response<Match> {
         val call = RestClient().getService().getMatch(id)
         val response = call.awaitResponse()
@@ -18,12 +31,14 @@ class MatchesHandler {
         return response
     }
 
-    suspend fun getMatches(): Response<List<Match>> {
-        val call = RestClient().getService().getMatches()
-        val response = call.awaitResponse()
-        Log.d("app_logs", response.toString())
+    private fun getItems(){
 
-        return response
+    }
+
+    suspend fun getMatches(page: Int): Response<List<Match>> {
+
+
+        return RestClient().getService().getMatches().awaitResponse()
     }
 
     @RequiresApi(Build.VERSION_CODES.O)

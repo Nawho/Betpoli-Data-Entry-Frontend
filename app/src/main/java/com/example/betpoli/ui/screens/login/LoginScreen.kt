@@ -30,11 +30,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewModelScope
 import com.example.betpoli.R
 import com.example.betpoli.ui.BetViewModel
 import com.example.betpoli.ui.components.Custombutton
 import com.example.betpoli.ui.components.PasswordTextField
 import com.example.betpoli.ui.components.EmailTextField
+import kotlinx.coroutines.launch
 
 @Composable
 fun LoginScreen(
@@ -45,6 +47,7 @@ fun LoginScreen(
     val emailError = remember { mutableStateOf(true) }
     val passwordError = remember { mutableStateOf(true) }
     val focusManager = LocalFocusManager.current
+    val loginViewModel = LoginViewModel()
 
     Surface(
         color= MaterialTheme.colorScheme.background,
@@ -95,9 +98,10 @@ fun LoginScreen(
                         enabled = !emailError.value && !passwordError.value,
                         onClick = {
                             Log.d("app_logs", "Login clicked")
-                            val viewmodel = BetViewModel()
-                            viewmodel.postUser(emailValue.value.text, passwordValue.value.text)
-                            onceLogged()
+                            loginViewModel.viewModelScope.launch {
+                                loginViewModel.postLogin(emailValue.value.text, passwordValue.value.text)
+                                onceLogged()
+                            }
                         },
                     )
 

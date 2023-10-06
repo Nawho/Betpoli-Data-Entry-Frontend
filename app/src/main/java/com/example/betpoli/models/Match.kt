@@ -24,9 +24,9 @@ data class Match(
     @SerializedName("gol_visitante")
     var golesVisitante: Int,
     @SerializedName("estado")
-    val matchState: MatchState,
+    val matchState: String,
     @SerializedName("fecha")
     val date: String,
-    @SerializedName("id")
-    val id: Int
+    @SerializedName("_id")
+    val id: String
 )

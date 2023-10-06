@@ -4,7 +4,7 @@ import android.util.Log
 import com.google.gson.JsonObject
 import retrofit2.awaitResponse
 
-class LoginHandler {
+class LoginRepository {
     suspend fun postLogin(email: String, password: String) {
         try {
             val loginRequest = JsonObject()

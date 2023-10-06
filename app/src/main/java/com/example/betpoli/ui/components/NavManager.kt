@@ -1,4 +1,6 @@
 package com.example.betpoli.ui.components
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.navigation.NavHostController
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
@@ -9,6 +11,7 @@ import com.example.betpoli.ui.screens.login.LoginScreen
 import com.example.betpoli.ui.screens.matches.MatchesScreen
 import com.example.betpoli.ui.screens.shared.Screens
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun BetPoliApp(
     navController: NavHostController = rememberNavController()
