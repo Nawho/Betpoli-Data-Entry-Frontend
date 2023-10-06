@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder
 import com.google.gson.JsonObject
 import okhttp3.OkHttpClient
 import retrofit2.Call
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Body
@@ -17,7 +18,7 @@ interface ApiCalls {
     fun postLogin(@Body journalist: JsonObject): Call<Unit>
 
     @GET("/matches/all")
-    fun getMatches(): Call<List<Match>>
+    fun getMatches(): Response<List<Match>>
 
     @GET("/match/:id")
     fun getMatch(id: Int): Call<Match>

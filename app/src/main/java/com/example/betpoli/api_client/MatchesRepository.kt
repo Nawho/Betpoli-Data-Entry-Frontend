@@ -3,17 +3,21 @@ package com.example.betpoli.api_client
 import android.os.Build
 import android.util.Log
 import androidx.annotation.RequiresApi
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.betpoli.models.Match
-import kotlinx.coroutines.delay
+import com.google.gson.annotations.SerializedName
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import retrofit2.Response
 import retrofit2.awaitResponse
 import java.time.LocalDate
 
+
+sealed class Resource<T>(val data: T?, val message: String?) {
+    class Success<T>(data: T) : Resource<T>(data, null)
+    class Error<T>(message: String) : Resource<T>(null, message)
+}
 class MatchesRepository {
-    val _matchesFlow = MutableStateFlow<List<Match>>(emptyList());
+    private val _matchesFlow = MutableStateFlow<List<Match>>(emptyList());
     val matchesFlow = _matchesFlow.asSharedFlow()
 
     init {
@@ -35,10 +39,19 @@ class MatchesRepository {
 
     }
 
-    suspend fun getMatches(page: Int): Response<List<Match>> {
+    fun getMatches(page: Int): Resource<List<Match>> {
+        val response = RestClient().getService().getMatches()
+        val resBody = response.body()
 
-
-        return RestClient().getService().getMatches().awaitResponse()
+        return try {
+            if (response.isSuccessful && resBody != null) {
+                Resource.Success(resBody)
+            }  else {
+                Resource.Error("ERROR: An unexpected error with the API call occurred.")
+            }
+        } catch (e: Exception) {
+            Resource.Error(e.message ?: "ERROR: An error occurred with Retrofit.")
+        }
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
