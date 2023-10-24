@@ -1,7 +1,7 @@
 Matches:
+Infinite scrolling [DONE]
 Translate match states
 create good looking UI with team names that shrink to a certain point and then use ellipsis (...)
-
 Refactor (section login and matches folder)
 
 https://medium.com/@mathroda/infinite-scroll-with-paginated-api-calls-in-jetpack-compose-4c3facfb50ed

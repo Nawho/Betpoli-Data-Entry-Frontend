@@ -1,21 +1,13 @@
 package com.example.betpoli.ui.screens.matches
 
 import android.util.Log
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.betpoli.api_client.MatchesRepository
 import com.example.betpoli.api_client.Resource
 import com.example.betpoli.models.Match
-import com.example.betpoli.ui.BetViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.update
-import retrofit2.Response
 
 class MatchesViewModel: ViewModel()  {
     private val matchesRepo = MatchesRepository()

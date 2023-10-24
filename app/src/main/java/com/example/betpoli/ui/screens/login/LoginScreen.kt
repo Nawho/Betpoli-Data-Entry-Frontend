@@ -32,7 +32,6 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewModelScope
 import com.example.betpoli.R
-import com.example.betpoli.ui.BetViewModel
 import com.example.betpoli.ui.components.Custombutton
 import com.example.betpoli.ui.components.PasswordTextField
 import com.example.betpoli.ui.components.EmailTextField
