@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">BetPoli</string>
+    <string name="landing_bg_description">BetPoli Data Entry Panel</string>
+
+    <string name="email_invalid">El correo electrónico no es válido.</string>
+    <string name="email_placeholder">Ingrese su correo electrónico</string>
+    <string name="email_label">Correo electrónico</string>
+    <string name="password_label">Contraseña</string>
+    <string name="password_placeholder">Ingrese su contraseña</string>
+    <string name="password_invalid_empty">La contraseña no puede estar vacía.</string>
+    <string name="betpoli_logo">betpoli_logo</string>
+    <string name="login_btn_text">Login</string>
+    <string name="not_journalist_1">¿No eres periodista?</string>
+    <string name="not_journalist_2">" Ingresa Aquí"</string>
+    <string name="password_show_content_description">show_password</string>
+    <string name="password_hide_content_description">hide_password</string>
+</resources>

@@ -1,0 +1,10 @@
+Matches:
+Translate match states
+create good looking UI with team names that shrink to a certain point and then use ellipsis (...)
+
+Refactor (section login and matches folder)
+
+https://medium.com/@mathroda/infinite-scroll-with-paginated-api-calls-in-jetpack-compose-4c3facfb50ed
+https://github.dev/MathRoda/DashCoin
+https://balwindersinghrajput.medium.com/complete-guide-to-livedata-and-flow-answering-why-where-when-and-which-6b31496ba7f3
+https://developer.android.com/kotlin/flow/stateflow-and-sharedflow?hl=es-419
